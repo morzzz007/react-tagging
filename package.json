@@ -1,0 +1,16 @@
+{
+  "name": "react-tagging",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "webpack-dev-server --devtool eval --progress --colors --content-base build",
+    "deploy": "webpack -p"
+  },
+  "author": "Marton Papp",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "jsx-loader": "^0.12.2",
+    "react": "^0.13.2",
+    "webpack": "^1.8.11",
+    "webpack-dev-server": "^1.8.2"
+  }
+}
