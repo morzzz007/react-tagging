@@ -7,10 +7,11 @@ var TagFilterTag = require('./tag.jsx');
 var TagFilterInput = require('./input.jsx');
 var TagFilterDropdown = require('./dropdown.jsx');
 
-var TagFilter = React.createClass({
+module.exports = React.createClass({
 
   propTypes: {
     tags: React.PropTypes.array,
+    suggestions: React.PropTypes.array,
     addKeys: React.PropTypes.array,
     placeholder: React.PropTypes.string
   },
@@ -112,13 +113,22 @@ var TagFilter = React.createClass({
   },
 
   getSuggestions: function (text) {
+    text = text.toLowerCase();
+    var filtered = this.props.suggestions.filter(function (value) {
+      return value.toLowerCase().indexOf(text) > -1;
+    });
+
+    var sorted = filtered.sort(function (a,b) {
+      return a.toLowerCase().indexOf(text) >= b.toLowerCase().indexOf(text);
+    });
+
     this.setState(
-      { dropdownItems : [text + ' first suggestion', text + ' second suggestion', text + ' third suggestion']}
+      { dropdownItems : sorted }
     );
   },
 
   getClasses : function () {
-    if(this.state.dropdownItems.length > 0) 
+    if(this.state.tag.length > 1 && this.state.dropdownItems.length > 0) 
       return  'dropdown-open';
     return 'dropdown-closed';
   },
@@ -144,5 +154,3 @@ var TagFilter = React.createClass({
 
   }
 });
-
-React.render(React.createElement(TagFilter), document.body);

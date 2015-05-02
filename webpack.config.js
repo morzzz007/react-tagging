@@ -3,7 +3,7 @@ path = require('path');
 var node_dir = __dirname +'/node_modules';
 
 var config = {
-  entry: ['./js/tagfilter.jsx'],
+  entry: ['./js/samples.jsx'],
   addVendor: function (name, path) {
    	this.resolve.alias[name] = path;
   },
