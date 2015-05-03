@@ -260,16 +260,8 @@ function onChangeFunction (newVal, oldVal) {
 function ajaxRequestES6 (text) {
 
   var requestPromise = new Promise(function (resolve, reject) {
-    $.get( 'http://www.omdbapi.com/', { s: text } ).done(function( data ) {
-      
-      if (data.Search) {
-        var result = data.Search.map(function (item) {
-          return item.Title;
-        });
-        resolve(result);
-      } else {
-        resolve([]); 
-      }
+    $.get( 'http://morz.hu/api/fruits.php', { q: text } ).done(function( data ) {
+        resolve(data);
     });
   });
 
@@ -281,16 +273,9 @@ function ajaxRequestJQuery (text) {
 
   var requestPromise = $.Deferred();
 
-	$.get( 'http://www.omdbapi.com/', { s: text } ).done(function( data ) {
-      if (data.Search) {
-        var result = data.Search.map(function (item) {
-          return item.Title;
-        });
-        requestPromise.resolve(result);
-      } else {
-        requestPromise.resolve([]); 
-      }
-    });
+  $.get( 'http://morz.hu/api/fruits.php', { q: text } ).done(function( data ) {
+      requestPromise.resolve(data);
+  });
 
   return requestPromise;
 

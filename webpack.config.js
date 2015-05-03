@@ -17,7 +17,7 @@ var config = {
   module: {
   	noParse: [new RegExp(/\.min.js$/)],
     loaders: [
-      { test: /\.jsx$/, loader: 'jsx-loader' }
+      { test: /\.jsx$/, loader: 'jsx-loader?harmony' }
     ]
   }
 };

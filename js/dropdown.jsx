@@ -12,13 +12,12 @@ module.exports = React.createClass({
     if(this.props.items) {
       dropDownItems = this.props.items.map(function (item, i) {
         return React.createElement(TagFilterDropdownItem, 
-          { text: item, selected: this.props.selectedIndex == i, onSelect: this.props.onSelect.bind(null, i) });
+          { text: item, isSelected: this.props.selectedIndex == i, onSelect: this.props.onSelect.bind(null, i) });
         }.bind(this));
     }
 
     return (
-      React.createElement('div', 
-        { className: 'tag-filter-dropdown' }, dropDownItems)
+      React.createElement('div', { className: 'tag-filter-dropdown' }, dropDownItems)
     );
 
   }

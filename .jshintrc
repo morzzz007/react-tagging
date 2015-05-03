@@ -1,0 +1,7 @@
+{
+  "predef": [
+    "define",
+    "module",
+    "require"
+  ]
+}

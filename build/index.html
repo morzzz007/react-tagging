@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Tag Filter</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>React Tagging</title>
+
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">  
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
@@ -56,13 +59,13 @@
     </div>    
     <div class="row">
       <div class="col-md-12">
-        <h2>Movies <small>(AJAX suggestions using ES6 Promise, IE11+)</small></h2>
+        <h2>Fruits <small>(AJAX suggestions using ES6 Promise, IE11+)</small></h2>
         <div id='renderMoviesTagFilterHere'></div>
       </div>
     </div>  	
     <div class="row">
   		<div class="col-md-12">
-  			<h2>Movies <small>(AJAX suggestions using jQuery)</small></h2>
+  			<h2>Fruits <small>(AJAX suggestions using jQuery)</small></h2>
   			<div id='renderMoviesJqueryTagFilterHere'></div>
   		</div>
   	</div>
@@ -71,52 +74,54 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <table class="table table-condensed">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Type</th>
-              <th class="col-md-6">Info</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>onChange</td>
-              <td><code>function(newVal, oldVal)</code></td>
-              <td>The function to call when a new tag added or removed. <code>newVal</code> contains the current value of the tags, <code>oldVal</code> contains the previous value of the tags.</td>
-            </tr>
-            <tr>
-              <td>addKeys</td>
-              <td>Array</td>
-              <td>Array of keyCodes, defaults to <kbd>Enter (13)</kbd></td>
-            </tr>
-            <tr>
-              <td>removeKeys</td>
-              <td>Array</td>
-              <td>Array of keyCodes, defaults to <kbd>Backspace and Delete (46, 8)</kbd></td>
-            </tr>
-            <tr>
-              <td>upKey</td>
-              <td>Number</td>
-              <td>KeyCode that navigates up in the suggestions dropdown, defaults to <kbd>Up arrow (38)</kbd></td>
-            </tr>
-            <tr>
-              <td>downKey</td>
-              <td>Number</td>
-              <td>KeyCode that navigates down in the suggestions dropdown, defaults to <kbd>Down arrow (40)</kbd></td>
-            </tr>
-            <tr>
-              <td>suggestions</td>
-              <td>Array / <code>function(searchString)</code></td>
-              <td>Suggestions to show in the dropdown menu. If it's a function it must return a promise with a <code>then()</code> method. See the movies example for sample implementation.</td>
-            </tr>
-            <tr>
-              <td>tags</td>
-              <td>Array</td>
-              <td>Pre-selected tags.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th class="col-md-6">Info</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>onChange</td>
+                <td><code>function(newVal, oldVal)</code></td>
+                <td>The function to call when a new tag added or removed. <code>newVal</code> contains the current value of the tags, <code>oldVal</code> contains the previous value of the tags.</td>
+              </tr>
+              <tr>
+                <td>addKeys</td>
+                <td>Array</td>
+                <td>Array of keyCodes, defaults to <kbd>Enter (13)</kbd></td>
+              </tr>
+              <tr>
+                <td>removeKeys</td>
+                <td>Array</td>
+                <td>Array of keyCodes, defaults to <kbd>Backspace and Delete (46, 8)</kbd></td>
+              </tr>
+              <tr>
+                <td>upKey</td>
+                <td>Number</td>
+                <td>KeyCode that navigates up in the suggestions dropdown, defaults to <kbd>Up arrow (38)</kbd></td>
+              </tr>
+              <tr>
+                <td>downKey</td>
+                <td>Number</td>
+                <td>KeyCode that navigates down in the suggestions dropdown, defaults to <kbd>Down arrow (40)</kbd></td>
+              </tr>
+              <tr>
+                <td>suggestions</td>
+                <td>Array / <code>function(searchString)</code></td>
+                <td>Suggestions to show in the dropdown menu. If it's a function it must return a promise with a <code>then()</code> method. See the movies example for sample implementation.</td>
+              </tr>
+              <tr>
+                <td>tags</td>
+                <td>Array</td>
+                <td>Pre-selected tags.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

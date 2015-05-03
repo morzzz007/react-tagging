@@ -1,5 +1,3 @@
-/* global require */
-
 'use strict';
 
 var React = require('react');
@@ -11,7 +9,10 @@ module.exports = React.createClass({
 
   propTypes: {
     tags: React.PropTypes.array,
-    suggestions: React.PropTypes.array,
+    suggestions: React.PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.func
+    ]),
     addKeys: React.PropTypes.array,
     removeKeys: React.PropTypes.array,
     upKey: React.PropTypes.number,
