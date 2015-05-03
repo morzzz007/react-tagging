@@ -9,5 +9,8 @@ React tagging component with suggestions
     
     React.render(React.createElement(TagFilter, { suggestions: sampleSuggestions }), mountNode);
 
+# Api
+[Api docs](http://morz.hu/reacttagging/#api_docs)
+
 # Demo
-[Simple Demo With Suggestions](http://morz.hu/reacttagging/)
+[Simple Demo With Suggestions](http://morz.hu/reacttagging/#demos)

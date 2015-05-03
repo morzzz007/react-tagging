@@ -253,4 +253,8 @@ var sampleSuggestions = [
 'Zimbabwe',
 ];
 
-React.render(React.createElement(TagFilter, { suggestions: sampleSuggestions}), document.getElementById('renderTagFilterHere'));
+function onChangeFunction (newVal, oldVal) {
+	console.log('Changed from', oldVal, ' to ', newVal);
+}
+
+React.render(React.createElement(TagFilter, { tags: ['Hungary'], suggestions: sampleSuggestions, onChange: onChangeFunction}), document.getElementById('renderTagFilterHere'));

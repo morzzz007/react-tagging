@@ -5,17 +5,105 @@
   <title>Tag Filter</title>
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">  
-  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <link href="style.css" rel="stylesheet">
+  <style type="text/css">
+  	body {
+  		font-family: 'Open Sans', sans-serif;
+  	}
+  </style>
 </head>
 <body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">React-Tagging</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="https://github.com/morzzz007/react-tagging"><i class="fa fa-github-alt"></i> Fork it on GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
   <div class="container">
+    <div class="page-header" id="demos">
+      <h1>Demos</h1>
+    </div>
+    <div class="alert alert-info" role="alert">
+      <strong>Info:</strong> Open the developer console to see the callbacks in action!
+    </div>
   	<div class="row">
   		<div class="col-md-12">
-  			<h1>Countries (predefined suggestions)</h1>
+  			<h2>Countries (predefined suggestions)</h2>
   			<div id='renderTagFilterHere'></div>
   		</div>
   	</div>
+    <div class="page-header" id="api_docs">
+      <h1>Api</h1>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th class="col-md-6">Info</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>onChange</td>
+              <td><code>function(newVal, oldVal)</code></td>
+              <td>The function to call when a new tag added or removed. <code>newVal</code> contains the current value of the tags, <code>oldVal</code> contains the previous value of the tags.</td>
+            </tr>
+            <tr>
+              <td>addKeys</td>
+              <td>Array</td>
+              <td>Array of keyCodes, defaults to <kbd>Enter (13)</kbd></td>
+            </tr>
+            <tr>
+              <td>removeKeys</td>
+              <td>Array</td>
+              <td>Array of keyCodes, defaults to <kbd>Backspace and Delete (46, 8)</kbd></td>
+            </tr>
+            <tr>
+              <td>upKey</td>
+              <td>Number</td>
+              <td>KeyCode that navigates up in the suggestions dropdown, defaults to <kbd style="white-space: nowrap;">Up arrow (38)</kbd></td>
+            </tr>
+            <tr>
+              <td>downKey</td>
+              <td>Number</td>
+              <td>KeyCode that navigates down in the suggestions dropdown, defaults to <kbd style="white-space: nowrap;">Down arrow (40)</kbd></td>
+            </tr>
+            <tr>
+              <td>suggestions</td>
+              <td>Array</td>
+              <td>Suggestions to show in the dropdown menu.</td>
+            </tr>
+            <tr>
+              <td>tags</td>
+              <td>Array</td>
+              <td>Pre-selected tags.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
   <script src="tagfilter.js"></script>
 </body>

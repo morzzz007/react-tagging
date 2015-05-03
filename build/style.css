@@ -1,5 +1,5 @@
 .tag-filter-container {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 13px;
 }
 
@@ -49,9 +49,9 @@
 
 .tag-filter-input {
   font-size: 13px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   padding: 3px 0 3px 0;
-  margin: 3px 0 3px 10px;
+  margin: 2px 0 3px 10px;
   height: 21px;
   outline: 0;
   border: 0 !important;

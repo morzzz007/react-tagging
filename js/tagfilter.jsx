@@ -13,16 +13,19 @@ module.exports = React.createClass({
     tags: React.PropTypes.array,
     suggestions: React.PropTypes.array,
     addKeys: React.PropTypes.array,
-    placeholder: React.PropTypes.string
+    removeKeys: React.PropTypes.array,
+    upKey: React.PropTypes.number,
+    downKey: React.PropTypes.number
   },
 
   getDefaultProps : function () {
     return {
-      tags: ['first sample item', 'second item', 'third tag'],
+      tags: [],
       addKeys: [13],
       removeKeys: [46, 8],
       upKey: 38,
-      downKey: 40
+      downKey: 40,
+      onChange: function () {}
     };
   },
 
@@ -46,6 +49,7 @@ module.exports = React.createClass({
         this.setState(
           { tags: clone }
         );
+        this.props.onChange(clone, this.state.tags);
         return;
       }
     }
@@ -57,6 +61,7 @@ module.exports = React.createClass({
     if (trimmedTag.length > 0) clone.push(tag);
     this.setState({ tags: clone, tag: '', selectedDropdownIndex: -1, dropdownItems: [] });
     this.calculateInputWidth(1);
+    this.props.onChange(clone, this.state.tags);
   },
 
   addSuggestion: function (index) {
