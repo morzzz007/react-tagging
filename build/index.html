@@ -13,6 +13,9 @@
   	body {
   		font-family: 'Open Sans', sans-serif;
   	}
+    kbd {
+      white-space: nowrap;
+    }
   </style>
 </head>
 <body>
@@ -45,10 +48,22 @@
     <div class="alert alert-info" role="alert">
       <strong>Info:</strong> Open the developer console to see the callbacks in action!
     </div>
-  	<div class="row">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Countries <small>(predefined array of suggestions)</small></h2>
+        <div id='renderCountriesTagFilterHere'></div>
+      </div>
+    </div>    
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Movies <small>(AJAX suggestions using ES6 Promise, IE11+)</small></h2>
+        <div id='renderMoviesTagFilterHere'></div>
+      </div>
+    </div>  	
+    <div class="row">
   		<div class="col-md-12">
-  			<h2>Countries (predefined suggestions)</h2>
-  			<div id='renderTagFilterHere'></div>
+  			<h2>Movies <small>(AJAX suggestions using jQuery)</small></h2>
+  			<div id='renderMoviesJqueryTagFilterHere'></div>
   		</div>
   	</div>
     <div class="page-header" id="api_docs">
@@ -83,17 +98,17 @@
             <tr>
               <td>upKey</td>
               <td>Number</td>
-              <td>KeyCode that navigates up in the suggestions dropdown, defaults to <kbd style="white-space: nowrap;">Up arrow (38)</kbd></td>
+              <td>KeyCode that navigates up in the suggestions dropdown, defaults to <kbd>Up arrow (38)</kbd></td>
             </tr>
             <tr>
               <td>downKey</td>
               <td>Number</td>
-              <td>KeyCode that navigates down in the suggestions dropdown, defaults to <kbd style="white-space: nowrap;">Down arrow (40)</kbd></td>
+              <td>KeyCode that navigates down in the suggestions dropdown, defaults to <kbd>Down arrow (40)</kbd></td>
             </tr>
             <tr>
               <td>suggestions</td>
-              <td>Array</td>
-              <td>Suggestions to show in the dropdown menu.</td>
+              <td>Array / <code>function(searchString)</code></td>
+              <td>Suggestions to show in the dropdown menu. If it's a function it must return a promise with a <code>then()</code> method. See the movies example for sample implementation.</td>
             </tr>
             <tr>
               <td>tags</td>

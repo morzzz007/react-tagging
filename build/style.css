@@ -1,6 +1,7 @@
 .tag-filter-container {
   font-family: 'Open Sans', sans-serif;
   font-size: 13px;
+  position: relative;
 }
 
 .tag-filter {
@@ -10,7 +11,7 @@
   cursor: text;
   height: auto !important;
   margin: 0;
-  min-height: 30px;
+  min-height: 33px;
   overflow: hidden;
   padding: 2px;
   position: relative;
@@ -68,10 +69,13 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-top: none;
+  position: absolute;
+  width: 100%;
 }
 
 .dropdown-open .tag-filter-dropdown {
   display: block;
+  z-index: 100;
 }
 
 .dropdown-open .tag-filter {

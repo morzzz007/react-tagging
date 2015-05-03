@@ -257,4 +257,47 @@ function onChangeFunction (newVal, oldVal) {
 	console.log('Changed from', oldVal, ' to ', newVal);
 }
 
-React.render(React.createElement(TagFilter, { tags: ['Hungary'], suggestions: sampleSuggestions, onChange: onChangeFunction}), document.getElementById('renderTagFilterHere'));
+function ajaxRequestES6 (text) {
+
+  var requestPromise = new Promise(function (resolve, reject) {
+    $.get( 'http://www.omdbapi.com/', { s: text } ).done(function( data ) {
+      
+      if (data.Search) {
+        var result = data.Search.map(function (item) {
+          return item.Title;
+        });
+        resolve(result);
+      } else {
+        resolve([]); 
+      }
+    });
+  });
+
+  return requestPromise;
+
+}
+
+function ajaxRequestJQuery (text) {
+
+  var requestPromise = $.Deferred();
+
+	$.get( 'http://www.omdbapi.com/', { s: text } ).done(function( data ) {
+      if (data.Search) {
+        var result = data.Search.map(function (item) {
+          return item.Title;
+        });
+        requestPromise.resolve(result);
+      } else {
+        requestPromise.resolve([]); 
+      }
+    });
+
+  return requestPromise;
+
+}
+
+React.render(React.createElement(TagFilter, { tags: ['Hungary'], suggestions: sampleSuggestions, onChange: onChangeFunction}), document.getElementById('renderCountriesTagFilterHere'));
+
+React.render(React.createElement(TagFilter, { suggestions: ajaxRequestES6, onChange: onChangeFunction}), document.getElementById('renderMoviesTagFilterHere'));
+
+React.render(React.createElement(TagFilter, { suggestions: ajaxRequestJQuery, onChange: onChangeFunction}), document.getElementById('renderMoviesJqueryTagFilterHere'));

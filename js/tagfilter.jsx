@@ -119,21 +119,35 @@ module.exports = React.createClass({
 
   getSuggestions: function (text) {
     text = text.toLowerCase();
-    var filtered = this.props.suggestions.filter(function (value) {
-      return value.toLowerCase().indexOf(text) > -1;
-    });
+    var type = typeof(this.props.suggestions);
 
-    var sorted = filtered.sort(function (a,b) {
-      return a.toLowerCase().indexOf(text) >= b.toLowerCase().indexOf(text);
-    });
+    if (type === 'object') {
+      var filtered = this.props.suggestions.filter(function (value) {
+        return value.toLowerCase().indexOf(text) > -1;
+      });
 
-    this.setState(
-      { dropdownItems : sorted }
-    );
+      var sorted = filtered.sort(function (a,b) {
+        return a.toLowerCase().indexOf(text) >= b.toLowerCase().indexOf(text);
+      });
+
+      this.setState(
+        { dropdownItems : sorted }
+      );
+
+    }
+
+    if (type === 'function') {
+      this.props.suggestions(text).then(function (result) {
+        this.setState(
+          { dropdownItems : result }
+        );
+      }.bind(this));
+    }
+
   },
 
   getClasses : function () {
-    if(this.state.tag.length > 1 && this.state.dropdownItems.length > 0) 
+    if(this.state.tag.length > 1 && this.state.dropdownItems && this.state.dropdownItems.length > 0) 
       return  'dropdown-open';
     return 'dropdown-closed';
   },
