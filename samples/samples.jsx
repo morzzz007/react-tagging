@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-var TagFilter = require('./tagfilter.jsx');
+var TagFilter = require('../js/tagfilter.jsx');
 
 var sampleSuggestions = [
 'Afghanistan',

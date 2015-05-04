@@ -2,14 +2,22 @@
   "name": "react-tagging",
   "version": "0.0.4",
   "scripts": {
-    "dev": "webpack-dev-server --devtool eval --progress --colors --content-base build",
-    "deploy": "webpack -p"
+    "dev": "webpack-dev-server --devtool eval --progress --colors --content-base build --config=webpack.dev.config.js",
+    "deploy": "webpack -p",
+    "samples" : "webpack -p --config=webpack.dev.config.js"
   },
   "author": "Marton Papp",
   "license": "WTFPL",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/morzzz007/react-tagging.git"
+  },
   "dependencies": {
-    "jsx-loader": "^0.12.2",
-    "react": "^0.13.2",
+    "react": "^0.13.2"
+  },
+  "devDependencies": {
+    "babel-core": "^5.2.9",
+    "babel-loader": "^5.0.0",
     "webpack": "^1.8.11",
     "webpack-dev-server": "^1.8.2"
   }

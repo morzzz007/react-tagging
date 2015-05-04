@@ -4,7 +4,7 @@ var node_dir = __dirname +"/node_modules";
 
 var config = {
   entry: {
-    tagfilter : "./js/tagfilter.jsx"
+    sample : "./samples/samples.jsx"
   },
   externals: {
     "react": "React"
