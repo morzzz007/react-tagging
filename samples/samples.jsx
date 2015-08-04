@@ -253,6 +253,13 @@ var sampleSuggestions = [
 'Zimbabwe',
 ];
 
+var sampleSuggestionsWithIds = [
+  { id: 1, value: 'Audi'},
+  { id: 2, value: 'BMW'},
+  { id: 3, value: 'Mercedes'},
+  { id: 4, value: 'Volkswagen'},
+];
+
 function onChangeFunction (newVal, oldVal) {
 	console.log('Changed from', oldVal, ' to ', newVal);
 }
@@ -281,7 +288,9 @@ function ajaxRequestJQuery (text) {
 
 }
 
-React.render(React.createElement(TagFilter, { tags: ['Hungary'], suggestions: sampleSuggestions, onChange: onChangeFunction}), document.getElementById('renderCountriesTagFilterHere'));
+React.render(React.createElement(TagFilter, { tags: [{ id: undefined, value: 'Hungary'}], suggestions: sampleSuggestions, onChange: onChangeFunction}), document.getElementById('renderCountriesTagFilterHere'));
+
+React.render(React.createElement(TagFilter, { suggestions: sampleSuggestionsWithIds, onChange: onChangeFunction}), document.getElementById('renderCarsTagFilterHere'));
 
 React.render(React.createElement(TagFilter, { suggestions: ajaxRequestES6, onChange: onChangeFunction}), document.getElementById('renderMoviesTagFilterHere'));
 

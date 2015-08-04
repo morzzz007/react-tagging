@@ -58,8 +58,10 @@ module.exports = React.createClass({
   },
 
   addTag: function (tag) {
-    var clone = this.state.tags.slice(0), trimmedTag = tag.trim();
-    if (trimmedTag.length > 0) clone.push(tag);
+    var clone = this.state.tags.slice(0);
+    var trimmedTag = typeof(tag) === 'string' ? tag.trim() : tag.value;
+
+    if (trimmedTag.length > 0) clone.push({ id: tag.id, value: trimmedTag });
     this.setState({ tags: clone, tag: '', selectedDropdownIndex: -1, dropdownItems: [] });
     this.calculateInputWidth(1);
     this.props.onChange(clone, this.state.tags);
@@ -124,11 +126,21 @@ module.exports = React.createClass({
 
     if (type === 'object') {
       var filtered = this.props.suggestions.filter(function (value) {
-        return value.toLowerCase().indexOf(text) > -1;
+
+        var suggestionType = typeof(value);
+        if (suggestionType === 'string') {
+          return value.toLowerCase().indexOf(text) > -1;
+        } else {
+          return value.value.toLowerCase().indexOf(text) > -1;
+        }
+
       });
 
       var sorted = filtered.sort(function (a,b) {
-        return a.toLowerCase().indexOf(text) >= b.toLowerCase().indexOf(text);
+        var tempA = typeof(a) === 'string' ? a : a.value;
+        var tempB = typeof(b) === 'string' ? b : b.value;
+        
+        return tempA.toLowerCase().indexOf(text) >= tempB.toLowerCase().indexOf(text);
       });
 
       this.setState(
