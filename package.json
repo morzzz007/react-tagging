@@ -1,6 +1,6 @@
 {
   "name": "react-tagging",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "scripts": {
     "dev": "webpack-dev-server --devtool eval --progress --colors --content-base build --config=webpack.dev.config.js",
     "deploy": "webpack -p",

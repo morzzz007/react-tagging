@@ -7,12 +7,13 @@ var config = {
     tagfilter : "./js/tagfilter.jsx"
   },
   externals: {
-    "react": "React"
+    "react": "react"
   },
   resolve: {
     alias: {}
   },
   output: {
+    libraryTarget: 'umd',
     path: process.env.NODE_ENV === "production" ? "./dist" : "./build",
     filename: "[name].js"
   },
