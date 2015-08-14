@@ -1,15 +1,18 @@
-'use strict';
-
-var React = require('react');
+const React = require('react');
 
 module.exports = React.createClass({
-  render: function () {
 
-    var selectedClass = this.props.isSelected ? 'selected' : '';
+  propTypes: {
+    text: React.PropTypes.string,
+    isSelected: React.PropTypes.bool,
+    onSelect: React.PropTypes.func,
+  },
+
+  render() {
+    const selectedClass = this.props.isSelected ? 'selected' : '';
 
     return (
-      React.createElement('div', { className: 'tag-filter-dropdown-item ' + selectedClass, onClick: this.props.onSelect }, this.props.text)
+      React.createElement('div', { className: `tag-filter-dropdown-item ${selectedClass}`, onClick: this.props.onSelect }, this.props.text)
     );
-
-  }
+  },
 });

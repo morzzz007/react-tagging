@@ -1,22 +1,29 @@
-'use strict';
-
-var React = require('react');
+const React = require('react');
 
 module.exports = React.createClass({
-  render: function () {
 
-    var selectedClass = this.props.selected === true ? 'selected' : '';
-    var displayValue = typeof(tag) === 'string' ? this.props.tag : this.props.tag.value;
+  propTypes: {
+    tag: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.object,
+    ]),
+    selected: React.PropTypes.bool,
+    remove: React.PropTypes.func,
+  },
+
+  render() {
+    const selectedClass = this.props.selected === true ? 'selected' : '';
+    const displayValue = typeof(tag) === 'string' ? this.props.tag : this.props.tag.value;
 
     return (
-	    React.createElement('span', 
-        { className: 'tag-filter-node ' + selectedClass }, 
-        displayValue, React.createElement('a', 
+	    React.createElement('span',
+        { className: `tag-filter-node ${selectedClass}` },
+        displayValue, React.createElement('a',
           { className: 'fa fa-times tag-filter-node-remove',
-            href: 'javascript:;', 
-            onClick: this.props.remove
+            href: '#',
+            onClick: this.props.remove,
           } )
         )
     );
-  }
+  },
 });

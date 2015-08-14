@@ -1,25 +1,27 @@
-'use strict';
-
-var React = require('react');
-var TagFilterDropdownItem = require('./dropdownitem.jsx');
+const React = require('react');
+const TagFilterDropdownItem = require('./dropdownitem.jsx');
 
 module.exports = React.createClass({
 
-  render: function () {
+  propTypes: {
+    items: React.PropTypes.array,
+    selectedIndex: React.PropTypes.number,
+    onSelect: React.PropTypes.func,
+  },
 
-    var dropDownItems = [];
-    
-    if(this.props.items) {
-      dropDownItems = this.props.items.map(function (item, i) {
-        var displayText = typeof(item) === 'string' ? item : item.value;
-        return React.createElement(TagFilterDropdownItem, 
-          { text: displayText, isSelected: this.props.selectedIndex == i, onSelect: this.props.onSelect.bind(null, i) });
-        }.bind(this));
+  render() {
+    let dropDownItems = [];
+
+    if (this.props.items) {
+      dropDownItems = this.props.items.map((item, i) => {
+        const displayText = typeof(item) === 'string' ? item : item.value;
+        return React.createElement(TagFilterDropdownItem,
+          { text: displayText, isSelected: this.props.selectedIndex === i, onSelect: this.props.onSelect.bind(null, i) });
+      }.bind(this));
     }
 
     return (
       React.createElement('div', { className: 'tag-filter-dropdown' }, dropDownItems)
     );
-
-  }
+  },
 });

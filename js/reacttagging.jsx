@@ -1,9 +1,7 @@
-'use strict';
-
-var React = require('react');
-var TagFilterTag = require('./tag.jsx');
-var TagFilterInput = require('./input.jsx');
-var TagFilterDropdown = require('./dropdown.jsx');
+const React = require('react');
+const TagFilterTag = require('./tag.jsx');
+const TagFilterInput = require('./input.jsx');
+const TagFilterDropdown = require('./dropdown.jsx');
 
 module.exports = React.createClass({
 
@@ -11,40 +9,40 @@ module.exports = React.createClass({
     tags: React.PropTypes.array,
     suggestions: React.PropTypes.oneOfType([
       React.PropTypes.array,
-      React.PropTypes.func
+      React.PropTypes.func,
     ]),
     addKeys: React.PropTypes.array,
     removeKeys: React.PropTypes.array,
     upKey: React.PropTypes.number,
-    downKey: React.PropTypes.number
+    downKey: React.PropTypes.number,
+    onChange: React.PropTypes.func,
   },
 
-  getDefaultProps : function () {
+  getDefaultProps() {
     return {
       tags: [],
       addKeys: [13],
       removeKeys: [46, 8],
       upKey: 38,
       downKey: 40,
-      onChange: function () {}
+      onChange() {},
     };
   },
 
-  getInitialState : function () {
+  getInitialState() {
     return {
       tag: '',
       tags: this.props.tags,
       dropdownItems: [],
       inputWidth: 50,
-      selectedDropdownIndex: -1
+      selectedDropdownIndex: -1,
     };
   },
 
-  removeTag: function (tag) {
+  removeTag(tag) {
+    const clone = [...this.state.tags];
 
-    var clone = this.state.tags.slice(0);
-
-    for (var i = 0; i < clone.length; i++) {
+    for (let i = 0; i < clone.length; i++) {
       if (clone[i] === tag) {
         clone.splice(i, 1);
         this.setState(
@@ -54,12 +52,11 @@ module.exports = React.createClass({
         return;
       }
     }
-
   },
 
-  addTag: function (tag) {
-    var clone = this.state.tags.slice(0);
-    var trimmedTag = typeof(tag) === 'string' ? tag.trim() : tag.value;
+  addTag(tag) {
+    const clone = [...this.state.tags];
+    const trimmedTag = typeof(tag) === 'string' ? tag.trim() : tag.value;
 
     if (trimmedTag.length > 0) clone.push({ id: tag.id, value: trimmedTag });
     this.setState({ tags: clone, tag: '', selectedDropdownIndex: -1, dropdownItems: [] });
@@ -67,122 +64,109 @@ module.exports = React.createClass({
     this.props.onChange(clone, this.state.tags);
   },
 
-  addSuggestion: function (index) {
+  addSuggestion(index) {
     this.addTag(this.state.dropdownItems[index]);
   },
 
-  onInputChange : function (e) {
+  onInputChange(e) {
     this.setState({ tag: e.target.value, selectedDropdownIndex: -1 });
     this.calculateInputWidth(e.target.value.length);
     this.getSuggestions(e.target.value);
   },
 
-  onInputKeyDown : function (e) {
-    if (this.props.addKeys.indexOf(e.keyCode) != -1) {
-      if (this.state.selectedDropdownIndex == -1) {
+  onInputKeyDown(e) {
+    if (this.props.addKeys.indexOf(e.keyCode) !== -1) {
+      if (this.state.selectedDropdownIndex === -1) {
         this.addTag(this.state.tag);
       } else {
         this.addTag(this.state.dropdownItems[this.state.selectedDropdownIndex]);
       }
     }
-    if (this.props.removeKeys.indexOf(e.keyCode) != -1 && this.refs.input.getDOMNode().selectionStart === 0) {
+    if (this.props.removeKeys.indexOf(e.keyCode) !== -1 && this.refs.input.getDOMNode().selectionStart === 0) {
       this.removeTag(this.state.tags[this.state.tags.length - 1]);
     }
-    if (this.props.downKey == e.keyCode) {
+    if (this.props.downKey === e.keyCode) {
       e.preventDefault();
       this.selectDropdownItem('down');
     }
-    if (this.props.upKey == e.keyCode) {
+    if (this.props.upKey === e.keyCode) {
       e.preventDefault();
       this.selectDropdownItem('up');
     }
   },
 
-  onClick: function (e) {
-    if (e.target.className == 'tag-filter') {
+  onClick(e) {
+    if (e.target.className === 'tag-filter') {
       this.refs.input.getDOMNode().focus();
     }
   },
 
-  calculateInputWidth : function (length) {
-    var calculatedWidth = length * 12, maxWidth = this.refs.container.getDOMNode().offsetWidth - 20;
+  calculateInputWidth(length) {
+    const calculatedWidth = length * 12;
+    const maxWidth = this.refs.container.getDOMNode().offsetWidth - 20;
     this.setState({ inputWidth: calculatedWidth > maxWidth ? maxWidth : calculatedWidth });
   },
 
-  selectDropdownItem: function (direction) {
+  selectDropdownItem(direction) {
+    let index = this.state.selectedDropdownIndex;
 
-    var index = this.state.selectedDropdownIndex;
-
-    if (direction == 'down' && index < this.state.dropdownItems.length - 1) index++;
-    if (direction == 'up' && index > 0) index--;
+    if (direction === 'down' && index < this.state.dropdownItems.length - 1) index++;
+    if (direction === 'up' && index > 0) index--;
 
     this.setState( { selectedDropdownIndex: index });
-
   },
 
-  getSuggestions: function (text) {
-    text = text.toLowerCase();
-    var type = typeof(this.props.suggestions);
+  getSuggestions(text) {
+    const suggestionText = text.toLowerCase();
+    const type = typeof(this.props.suggestions);
 
     if (type === 'object') {
-      var filtered = this.props.suggestions.filter(function (value) {
-
-        var suggestionType = typeof(value);
-        if (suggestionType === 'string') {
-          return value.toLowerCase().indexOf(text) > -1;
-        } else {
-          return value.value.toLowerCase().indexOf(text) > -1;
-        }
-
+      const filtered = this.props.suggestions.filter(function suggestionFilter(value) {
+        if (typeof(value) === 'string') return value.toLowerCase().indexOf(suggestionText) > -1;
+        return value.value.toLowerCase().indexOf(suggestionText) > -1;
       });
 
-      var sorted = filtered.sort(function (a,b) {
-        var tempA = typeof(a) === 'string' ? a : a.value;
-        var tempB = typeof(b) === 'string' ? b : b.value;
-        
-        return tempA.toLowerCase().indexOf(text) >= tempB.toLowerCase().indexOf(text);
+      const sorted = filtered.sort(function suggestionSort(a, b) {
+        const tempA = typeof(a) === 'string' ? a : a.value;
+        const tempB = typeof(b) === 'string' ? b : b.value;
+
+        return tempA.toLowerCase().indexOf(suggestionText) >= tempB.toLowerCase().indexOf(text);
       });
 
       this.setState(
-        { dropdownItems : sorted }
+        { dropdownItems: sorted }
       );
-
     }
 
     if (type === 'function') {
-      this.props.suggestions(text).then(function (result) {
+      this.props.suggestions(text).then(result => {
         this.setState(
-          { dropdownItems : result }
+          { dropdownItems: result }
         );
       }.bind(this));
     }
-
   },
 
-  getClasses : function () {
-    if(this.state.tag.length > 1 && this.state.dropdownItems && this.state.dropdownItems.length > 0) 
-      return  'dropdown-open';
+  getClasses() {
+    if (this.state.tag.length > 1 && this.state.dropdownItems && this.state.dropdownItems.length > 0) return 'dropdown-open';
     return 'dropdown-closed';
   },
 
-  render: function () {
-
-    var tagNodes = this.state.tags.map(function (tag) {
-      return React.createElement(TagFilterTag, 
+  render() {
+    const tagNodes = this.state.tags.map(tag => {
+      return React.createElement(TagFilterTag,
         { tag: tag, remove: this.removeTag.bind(null, tag) });
     }.bind(this));
 
     return (
-      React.createElement('div', {className: 'tag-filter-container ' + this.getClasses() }, React.createElement('div', { className: 'tag-filter', ref: 'container', onClick: this.onClick }, tagNodes, 
-        React.createElement(TagFilterInput, 
+      React.createElement('div', {className: `tag-filter-container ${this.getClasses()}` }, React.createElement('div', { className: 'tag-filter', ref: 'container', onClick: this.onClick }, tagNodes,
+        React.createElement(TagFilterInput,
           { ref: 'input',
             value: this.state.tag,
             inputWidth: this.state.inputWidth,
-            onChange: this.onInputChange, 
-            onKeyDown: this.onInputKeyDown })), 
+            onChange: this.onInputChange,
+            onKeyDown: this.onInputKeyDown })),
         React.createElement(TagFilterDropdown, {items: this.state.dropdownItems, selectedIndex: this.state.selectedDropdownIndex, onSelect: this.addSuggestion} ))
-      
     );
-
-  }
+  },
 });
