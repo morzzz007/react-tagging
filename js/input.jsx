@@ -3,8 +3,11 @@ const React = require('react');
 module.exports = React.createClass({
 
   propTypes: {
-    inputWidth: React.PropTypes.string,
-    value: React.PropTypes.object,
+    inputWidth: React.PropTypes.number,
+    value: React.PropTypes.oneOfType([
+      React.PropTypes.object,
+      React.PropTypes.string,
+    ]),
     onChange: React.PropTypes.func,
     onKeyDown: React.PropTypes.func,
   },
