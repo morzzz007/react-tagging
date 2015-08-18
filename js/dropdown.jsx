@@ -7,6 +7,7 @@ module.exports = React.createClass({
     items: React.PropTypes.array,
     selectedIndex: React.PropTypes.number,
     onSelect: React.PropTypes.func,
+    displayField: React.PropTypes.string,
   },
 
   render() {
@@ -14,7 +15,7 @@ module.exports = React.createClass({
 
     if (this.props.items) {
       dropDownItems = this.props.items.map((item, i) => {
-        const displayText = typeof(item) === 'string' ? item : item.value;
+        const displayText = typeof(item) === 'string' ? item : item[this.props.displayField];
         return React.createElement(TagFilterDropdownItem,
           { text: displayText, isSelected: this.props.selectedIndex === i, onSelect: this.props.onSelect.bind(null, i) });
       }.bind(this));

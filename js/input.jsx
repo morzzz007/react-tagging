@@ -9,7 +9,7 @@ module.exports = React.createClass({
       React.PropTypes.string,
     ]),
     onChange: React.PropTypes.func,
-    onKeyDown: React.PropTypes.func,
+    onKeyDown: React.PropTypes.func
   },
 
   render() {

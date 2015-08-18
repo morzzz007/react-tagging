@@ -282,10 +282,20 @@ function ajaxRequestJQuery(text) {
   return requestPromise;
 }
 
-React.render(React.createElement(TagFilter, { tags: [{ id: undefined, value: 'Hungary'}], suggestions: sampleSuggestions, onChange: onChangeFunction}), document.getElementById('renderCountriesTagFilterHere'));
+function promiseValidation(data) {
+  return new Promise(resolve => {
+    resolve(data);
+  });
+}
 
-React.render(React.createElement(TagFilter, { suggestions: sampleSuggestionsWithIds, onChange: onChangeFunction}), document.getElementById('renderCarsTagFilterHere'));
+React.render(React.createElement(TagFilter, { tags: [], suggestions: [], onChange: onChangeFunction }), document.getElementById('renderSimpleTagFilterHere'));
 
-React.render(React.createElement(TagFilter, { suggestions: ajaxRequestES6, onChange: onChangeFunction}), document.getElementById('renderMoviesTagFilterHere'));
+React.render(React.createElement(TagFilter, { tags: [], suggestions: [], onChange: onChangeFunction, onAdd: promiseValidation}), document.getElementById('renderSimplePromiseTagFilterHere'));
 
-React.render(React.createElement(TagFilter, { suggestions: ajaxRequestJQuery, onChange: onChangeFunction}), document.getElementById('renderMoviesJqueryTagFilterHere'));
+// React.render(React.createElement(TagFilter, { tags: [{ id: undefined, value: 'Hungary'}], suggestions: sampleSuggestions, onChange: onChangeFunction}), document.getElementById('renderCountriesTagFilterHere'));
+
+// React.render(React.createElement(TagFilter, { suggestions: sampleSuggestionsWithIds, onChange: onChangeFunction}), document.getElementById('renderCarsTagFilterHere'));
+
+// React.render(React.createElement(TagFilter, { suggestions: ajaxRequestES6, onChange: onChangeFunction}), document.getElementById('renderMoviesTagFilterHere'));
+
+// React.render(React.createElement(TagFilter, { suggestions: ajaxRequestJQuery, onChange: onChangeFunction}), document.getElementById('renderMoviesJqueryTagFilterHere'));

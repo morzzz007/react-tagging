@@ -7,130 +7,93 @@
   <title>React Tagging</title>
 
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="semantic.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="semantic.min.js"></script>
   <link href="style.css" rel="stylesheet">
-  <style type="text/css">
-  	body {
-  		font-family: 'Open Sans', sans-serif;
-  	}
-    kbd {
-      white-space: nowrap;
-    }
-  </style>
+  <link href="site.css" rel="stylesheet">
 </head>
 <body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">React-Tagging</a>
-      </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="https://github.com/morzzz007/react-tagging"><i class="fa fa-github-alt"></i> Fork it on GitHub</a></li>
-        </ul>
+  <div class="ui fixed inverted menu">
+    <div class="ui container">
+      <div href="#" class="header item">
+        <img class="logo" src="logo.png">
+        React Tagging
       </div>
-    </div>
-  </nav>
-
-  <div class="container">
-    <div class="page-header" id="demos">
-      <h1>Demos</h1>
-    </div>
-    <div class="alert alert-info" role="alert">
-      <strong>Info:</strong> Open the developer console to see the callbacks in action!
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <h2>Countries <small>(predefined array of suggestions)</small></h2>
-        <div id='renderCountriesTagFilterHere'></div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <h2>Cars <small>(predefined array of suggestions with ids and values)</small></h2>
-        <div id='renderCarsTagFilterHere'></div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <h2>Fruits <small>(AJAX suggestions using ES6 Promise, IE11+)</small></h2>
-        <div id='renderMoviesTagFilterHere'></div>
-      </div>
-    </div>
-    <div class="row">
-  		<div class="col-md-12">
-  			<h2>Fruits <small>(AJAX suggestions using jQuery)</small></h2>
-  			<div id='renderMoviesJqueryTagFilterHere'></div>
-  		</div>
-  	</div>
-    <div class="page-header" id="api_docs">
-      <h1>Api</h1>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="table-responsive">
-          <table class="table table-condensed">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th class="col-md-6">Info</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>onChange</td>
-                <td><code>function(newVal, oldVal)</code></td>
-                <td>The function to call when a new tag added or removed. <code>newVal</code> contains the current value of the tags, <code>oldVal</code> contains the previous value of the tags.</td>
-              </tr>
-              <tr>
-                <td>addKeys</td>
-                <td>Array</td>
-                <td>Array of keyCodes, defaults to <kbd>Enter (13)</kbd></td>
-              </tr>
-              <tr>
-                <td>removeKeys</td>
-                <td>Array</td>
-                <td>Array of keyCodes, defaults to <kbd>Backspace and Delete (46, 8)</kbd></td>
-              </tr>
-              <tr>
-                <td>upKey</td>
-                <td>Number</td>
-                <td>KeyCode that navigates up in the suggestions dropdown, defaults to <kbd>Up arrow (38)</kbd></td>
-              </tr>
-              <tr>
-                <td>downKey</td>
-                <td>Number</td>
-                <td>KeyCode that navigates down in the suggestions dropdown, defaults to <kbd>Down arrow (40)</kbd></td>
-              </tr>
-              <tr>
-                <td>suggestions</td>
-                <td>Array / <code>function(searchString)</code></td>
-                <td>Suggestions to show in the dropdown menu. If it's a function it must return a promise with a <code>then()</code> method. See the movies example for sample implementation.</td>
-              </tr>
-              <tr>
-                <td>tags</td>
-                <td>Array</td>
-                <td>Pre-selected tags.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <a href="#" class="item">Examples</a>
+      <a href="#" class="item">Api</a>
+      <a href="https://github.com/morzzz007/react-tagging" class="item">Github</a>
     </div>
   </div>
+
+  <div class="ui first container">
+    <h1 class="ui header">React Tagging</h1>
+    <p>React tagging component with suggestions.</p>
+  </div>
+
+  <div class="ui container">
+    <h1 class="ui header">Examples</h1>
+    <div class="ui teal inverted segment tertiary">
+      <strong>Info:</strong> Open the developer console to see the callbacks in action!
+    </div>
+    <p>
+      <div id="renderCountriesTagFilterHere"></div>
+    </p>
+  </div>
+
+  <div class="ui container">
+
+    <h1 class="ui dividing header">API</h1>
+
+    <table class="ui padded table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Info</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>onChange</td>
+                  <td><code>function(newVal, oldVal)</code></td>
+                  <td>The function to call when a new tag added or removed. <code>newVal</code> contains the current value of the tags, <code>oldVal</code> contains the previous value of the tags.</td>
+                </tr>
+                <tr>
+                  <td>addKeys</td>
+                  <td>Array</td>
+                  <td>Array of keyCodes, defaults to <kbd>Enter (13)</kbd></td>
+                </tr>
+                <tr>
+                  <td>removeKeys</td>
+                  <td>Array</td>
+                  <td>Array of keyCodes, defaults to <kbd>Backspace and Delete (46, 8)</kbd></td>
+                </tr>
+                <tr>
+                  <td>upKey</td>
+                  <td>Number</td>
+                  <td>KeyCode that navigates up in the suggestions dropdown, defaults to <kbd>Up arrow (38)</kbd></td>
+                </tr>
+                <tr>
+                  <td>downKey</td>
+                  <td>Number</td>
+                  <td>KeyCode that navigates down in the suggestions dropdown, defaults to <kbd>Down arrow (40)</kbd></td>
+                </tr>
+                <tr>
+                  <td>suggestions</td>
+                  <td>Array / <code>function(searchString)</code></td>
+                  <td>Suggestions to show in the dropdown menu. If it's a function it must return a promise with a <code>then()</code> method. See the movies example for sample implementation.</td>
+                </tr>
+                <tr>
+                  <td>tags</td>
+                  <td>Array</td>
+                  <td>Pre-selected tags.</td>
+                </tr>
+              </tbody>
+    </table>
+  </div>
+
   <script src="sample.js"></script>
 </body>
 </html>

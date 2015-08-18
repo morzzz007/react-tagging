@@ -16,6 +16,7 @@ module.exports = React.createClass({
     upKey: React.PropTypes.number,
     downKey: React.PropTypes.number,
     onChange: React.PropTypes.func,
+    onAdd: React.PropTypes.func,
     displayField: React.PropTypes.string,
   },
 
@@ -60,12 +61,22 @@ module.exports = React.createClass({
     const trimmedTag = typeof(tag) === 'string' ? tag.trim() : tag[this.props.displayField];
 
     if (trimmedTag.length === 0) return;
-    const clone = React.addons.update(this.state.tags, { $push:
-      [{ id: tag.id, [this.props.displayField]: trimmedTag }],
-    });
-    this.setState({ tags: clone, tag: '', selectedDropdownIndex: -1, dropdownItems: [] });
-    this.calculateInputWidth(1);
-    this.props.onChange(clone, this.state.tags);
+    const baseObject = { [this.props.displayField]: trimmedTag };
+
+    function handleAdd(result) {
+      const clone = React.addons.update(this.state.tags, { $push: [result] });
+      this.setState({ tags: clone, tag: '', selectedDropdownIndex: -1, dropdownItems: [] });
+      this.calculateInputWidth(1);
+      this.props.onChange(clone, this.state.tags);
+    }
+
+    if (typeof(this.props.onAdd) === 'function') {
+      this.props.onAdd(baseObject, this.state.tags).then(result => {
+        handleAdd.bind(this, baseObject)();
+      });
+    } else {
+      handleAdd.bind(this, baseObject)();
+    }
   },
 
   addSuggestion(index) {
@@ -157,9 +168,9 @@ module.exports = React.createClass({
   },
 
   render() {
-    const tagNodes = this.state.tags.map(tag => {
+    const tagNodes = this.state.tags.map( (tag, key) => {
       return React.createElement(TagFilterTag,
-        { tag: tag, remove: this.removeTag.bind(null, tag) });
+        { key, tag: tag, remove: this.removeTag.bind(null, tag), displayField: this.props.displayField });
     }.bind(this));
 
     return (
