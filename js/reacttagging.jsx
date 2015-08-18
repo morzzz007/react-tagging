@@ -1,4 +1,4 @@
-const React = require('react');
+const React = require('react/addons');
 const TagFilterTag = require('./tag.jsx');
 const TagFilterInput = require('./input.jsx');
 const TagFilterDropdown = require('./dropdown.jsx');
@@ -16,6 +16,7 @@ module.exports = React.createClass({
     upKey: React.PropTypes.number,
     downKey: React.PropTypes.number,
     onChange: React.PropTypes.func,
+    displayField: React.PropTypes.string,
   },
 
   getDefaultProps() {
@@ -26,6 +27,7 @@ module.exports = React.createClass({
       upKey: 38,
       downKey: 40,
       onChange() {},
+      displayField: 'value',
     };
   },
 
@@ -55,10 +57,12 @@ module.exports = React.createClass({
   },
 
   addTag(tag) {
-    const clone = [...this.state.tags];
-    const trimmedTag = typeof(tag) === 'string' ? tag.trim() : tag.value;
+    const trimmedTag = typeof(tag) === 'string' ? tag.trim() : tag[this.props.displayField];
 
-    if (trimmedTag.length > 0) clone.push({ id: tag.id, value: trimmedTag });
+    if (trimmedTag.length === 0) return;
+    const clone = React.addons.update(this.state.tags, { $push:
+      [{ id: tag.id, [this.props.displayField]: trimmedTag }],
+    });
     this.setState({ tags: clone, tag: '', selectedDropdownIndex: -1, dropdownItems: [] });
     this.calculateInputWidth(1);
     this.props.onChange(clone, this.state.tags);
