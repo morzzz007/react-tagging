@@ -284,6 +284,8 @@ function ajaxRequestJQuery(text) {
 
 function promiseValidation(data) {
   return new Promise(resolve => {
+    // do someting with the data, the resolved data will be inserted into the tags array
+    data.hello = 'world';
     resolve(data);
   });
 }

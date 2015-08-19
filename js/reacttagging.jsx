@@ -72,7 +72,7 @@ module.exports = React.createClass({
 
     if (typeof(this.props.onAdd) === 'function') {
       this.props.onAdd(baseObject, this.state.tags).then(result => {
-        handleAdd.bind(this, baseObject)();
+        handleAdd.bind(this, result)();
       });
     } else {
       handleAdd.bind(this, baseObject)();
