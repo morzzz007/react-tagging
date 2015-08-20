@@ -16,6 +16,7 @@
   <script src="semantic.min.js"></script>
   <link href="style.css" rel="stylesheet">
   <link href="site.css" rel="stylesheet">
+  <link href="prism.css" rel="stylesheet">
 
   <script>
   $(document)
@@ -83,27 +84,64 @@
 
   <div class="ui vertical stripe segment">
     <div class="ui middle aligned stackable grid container">
-      <h1 class="ui dividing header">Examples</h1>
+      <h1 class="ui dividing header">How To Use</h1>
 
       <div class="row">
-        <div class="column">
-          <h3 class="ui header">Simple input without suggestions</h3>
-          <div id="renderSimpleTagFilterHere"></div>
+        <div class="eight wide column">
+          <p><span class="ui circular label huge u-margin-r10">1</span> Install with npm</p>
         </div>
-      </div>      
+        <div class="eight wide column">
+          <pre><code class="language-javascript">npm install react-tagging</code></pre>
+        </div>
+      </div>   
 
       <div class="row">
-        <div class="column">
-          <h3 class="ui header">Simple input with input validation using promises</h3>
-          <div id="renderSimplePromiseTagFilterHere"></div>
+        <div class="eight wide column">
+          <p><span class="ui circular label huge u-margin-r10">2</span> Require it in a JSX file</p>
+        </div>
+        <div class="eight wide column">
+          <pre><code class="language-javascript">const React = require('react');
+const ReactTagging = require('react-tagging');</code></pre>
+        </div>
+      </div>  
+
+      <div class="row">
+        <div class="eight wide column">
+          <p><span class="ui circular label huge u-margin-r10">3</span> Use it</p>
+        </div>
+        <div class="eight wide column">
+          <pre><code class="language-javascript">function onChangeFunction(newVal, oldVal) {
+  console.log('Changed from', oldVal, ' to ', newVal);
+}
+
+React.render(React.createElement(ReactTagging, { onChange: onChangeFunction }), document.getElementById('insertYourIdHere'));</code></pre>
         </div>
       </div>
-
     </div>
   </div>
 
+<div class="ui vertical stripe segment">
+  <div class="ui grid container">
+    <h1 class="ui dividing header">Examples</h1>
+    <div class="row">
+      <div class="column">
+        <p>Simple input without suggestions</p>
+        <div id="renderSimpleTagFilterHere"></div>
+      </div>
+    </div>      
+
+    <div class="row">
+      <div class="column">
+        <p>Simple input with input validation using promises</p>
+        <div id="renderSimplePromiseTagFilterHere"></div>
+      </div>
+    </div>
+
+  </div>
 </div>
+
   <script src="sample.js"></script>
+  <script src="prism.js"></script>
   <script type="text/javascript">
 
     (function(){
