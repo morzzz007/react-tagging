@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+  <!-- Standard Meta -->
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>React Tagging</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+  <!-- Site Properities -->
+  <title>React Tagging Component</title>
 
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="semantic.css" rel="stylesheet">
@@ -12,88 +16,119 @@
   <script src="semantic.min.js"></script>
   <link href="style.css" rel="stylesheet">
   <link href="site.css" rel="stylesheet">
+
+  <script>
+  $(document)
+    .ready(function() {
+
+      // fix menu when passed
+      $('.masthead')
+        .visibility({
+          once: false,
+          onBottomPassed: function() {
+            $('.fixed.menu').transition('fade in');
+          },
+          onBottomPassedReverse: function() {
+            $('.fixed.menu').transition('fade out');
+          }
+        })
+      ;
+
+      // create sidebar and attach to menu open
+      $('.ui.sidebar')
+        .sidebar('attach events', '.toc.item')
+      ;
+
+    })
+  ;
+  </script>
 </head>
 <body>
 
-  <div class="ui fixed inverted menu">
+<!-- Following Menu -->
+<div class="ui large top fixed menu transition hidden">
+  <div class="ui container">
+    <a class="active item">Home</a>
+    <a class="item">Examples</a>
+    <a class="item">Api Docs</a>
+    <a class="item">Fork on GitHub</a>
+  </div>
+</div>
+
+<!-- Page Contents -->
+<div>
+  <div class="ui inverted vertical masthead center aligned segment">
+
     <div class="ui container">
-      <div href="#" class="header item">
-        <img class="logo" src="logo.png">
-        React Tagging
+      <div class="ui large secondary inverted pointing menu">
+        <a class="toc item">
+          <i class="fa fa-bars"></i>
+        </a>
+        <a class="active item">Home</a>
+        <a class="item">Examples</a>
+        <a class="item">Api Docs</a>
+        <div class="right item">
+          <a class="ui inverted button">Fork on GitHub</a>
+        </div>
       </div>
-      <a href="#" class="item">Examples</a>
-      <a href="#" class="item">Api</a>
-      <a href="https://github.com/morzzz007/react-tagging" class="item">Github</a>
+    </div>
+
+    <div class="ui container">
+      <img class="logo-image" src="logo.png" alt="React Tagging">
+      <h2 class="subheader">React tagging component with suggestions</h2>
+      <a class="npm ui inverted huge button">npm install react-tagging</a>
+    </div>
+
+  </div>
+
+  <div class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable grid container">
+      <h1 class="ui dividing header">Examples</h1>
+
+      <div class="row">
+        <div class="column">
+          <h3 class="ui header">Simple input without suggestions</h3>
+          <div id="renderSimpleTagFilterHere"></div>
+        </div>
+      </div>      
+
+      <div class="row">
+        <div class="column">
+          <h3 class="ui header">Simple input with input validation using promises</h3>
+          <div id="renderSimplePromiseTagFilterHere"></div>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <div class="ui first container">
-    <h1 class="ui header">React Tagging</h1>
-    <p>React tagging component with suggestions.</p>
-  </div>
-
-  <div class="ui container">
-    <h1 class="ui header">Examples</h1>
-    <div class="ui teal inverted segment tertiary">
-      <strong>Info:</strong> Open the developer console to see the callbacks in action!
-    </div>
-    <p>
-      <div id="renderCountriesTagFilterHere"></div>
-    </p>
-  </div>
-
-  <div class="ui container">
-
-    <h1 class="ui dividing header">API</h1>
-
-    <table class="ui padded table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Info</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>onChange</td>
-                  <td><code>function(newVal, oldVal)</code></td>
-                  <td>The function to call when a new tag added or removed. <code>newVal</code> contains the current value of the tags, <code>oldVal</code> contains the previous value of the tags.</td>
-                </tr>
-                <tr>
-                  <td>addKeys</td>
-                  <td>Array</td>
-                  <td>Array of keyCodes, defaults to <kbd>Enter (13)</kbd></td>
-                </tr>
-                <tr>
-                  <td>removeKeys</td>
-                  <td>Array</td>
-                  <td>Array of keyCodes, defaults to <kbd>Backspace and Delete (46, 8)</kbd></td>
-                </tr>
-                <tr>
-                  <td>upKey</td>
-                  <td>Number</td>
-                  <td>KeyCode that navigates up in the suggestions dropdown, defaults to <kbd>Up arrow (38)</kbd></td>
-                </tr>
-                <tr>
-                  <td>downKey</td>
-                  <td>Number</td>
-                  <td>KeyCode that navigates down in the suggestions dropdown, defaults to <kbd>Down arrow (40)</kbd></td>
-                </tr>
-                <tr>
-                  <td>suggestions</td>
-                  <td>Array / <code>function(searchString)</code></td>
-                  <td>Suggestions to show in the dropdown menu. If it's a function it must return a promise with a <code>then()</code> method. See the movies example for sample implementation.</td>
-                </tr>
-                <tr>
-                  <td>tags</td>
-                  <td>Array</td>
-                  <td>Pre-selected tags.</td>
-                </tr>
-              </tbody>
-    </table>
-  </div>
-
+</div>
   <script src="sample.js"></script>
+  <script type="text/javascript">
+
+    (function(){
+
+      var parallax = document.querySelector(".logo-image"),
+          text = document.querySelector(".subheader")
+          npm = document.querySelector(".npm")
+          speed = 0.42;
+
+      window.onscroll = function(){
+          var windowYOffset = window.pageYOffset
+          if (windowYOffset > 500) return;
+
+          var translate = "translateY(" + (windowYOffset * speed) + "px)";
+              opacity = 1-(windowYOffset * speed) /50;
+
+
+          parallax.style.transform = translate;
+          text.style.opacity = opacity;
+          npm.style.opacity = opacity + 0.2;
+
+      };
+
+    })();
+
+  </script>
 </body>
 </html>

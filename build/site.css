@@ -1,5 +1,43 @@
+.logo-image {
+  padding-top: 150px;
+}
+
+.npm {
+  margin-top: 10px !important;
+}
+
 .hidden.menu {
   display: none;
+}
+
+.react-header {
+  padding: 0 .1em;
+  color: #303030;
+}
+
+.subheader {
+  text-transform: capitalize;
+  font-size: 20px;
+}
+
+.ui.header.uppercase {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.ui.secondary.inverted.pointing.menu {
+    border: none;
+}
+.ui.secondary.pointing.menu {
+    border: none;
+}
+
+.masthead.ui.inverted.segment {
+  background-color: #e74c3c;
+  background: url("bg2.png");
+  background-size: cover;
+  /*background-attachment: fixed;*/
+  background-position: 0% 0%;
 }
 
 .masthead.segment {
@@ -13,14 +51,11 @@
   margin-left: 0.5em;
 }
 .masthead h1.ui.header {
-  margin-top: 2em;
-  margin-bottom: 0em;
-  font-size: 4em;
-  font-weight: normal;
-}
-.masthead h2 {
-  font-size: 1.7em;
-  font-weight: normal;
+  margin-top: 1.5em;
+  margin-bottom: 0;
+  font-size: 60px;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .ui.vertical.stripe {
