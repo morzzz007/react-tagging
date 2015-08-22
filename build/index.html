@@ -82,9 +82,8 @@
 
   </div>
 
-  <div class="ui vertical stripe segment">
-    <div class="ui middle aligned stackable grid container">
-      <h1 class="ui dividing header">How To Use</h1>
+    <div class="ui middle aligned stackable grid container howto">
+      <h1 class="ui dividing header u-margin-t25">How To Use</h1>
 
       <div class="row">
         <div class="eight wide column">
@@ -118,27 +117,71 @@ React.render(React.createElement(ReactTagging, { onChange: onChangeFunction }), 
         </div>
       </div>
     </div>
-  </div>
 
-<div class="ui vertical stripe segment">
   <div class="ui grid container">
-    <h1 class="ui dividing header">Examples</h1>
     <div class="row">
       <div class="column">
-        <p>Simple input without suggestions</p>
-        <div id="renderSimpleTagFilterHere"></div>
+        <h1 class="ui dividing header">Simple input without suggestions</h1>
+        <div class="ui pointing menu">
+          <a class="active item" data-tab="expl_1"> <i class="fa fa-play icon"></i> Live Example</a>
+          <a class="item" data-tab="cd_1"> <i class="fa fa-code icon"></i> Source</a>
+        </div>
+        <div class="ui active tab segment" data-tab="expl_1">
+          <div id="renderSimpleTagFilterHere"></div>
+        </div>
+        <div class="ui tab segment" data-tab="cd_1">
+          <div>
+            <pre>
+              <code class="language-javascript">
+function onChangeFunction(newVal, oldVal) {
+  console.log('Changed from', oldVal, ' to ', newVal);
+}
+
+React.render(
+  React.createElement(
+    TagFilter, { tags: [], suggestions: [], onChange: onChangeFunction }),
+    document.getElementById('renderSimpleTagFilterHere')
+);</code>
+            </pre>
+          </div>
+        </div>
       </div>
     </div>      
 
     <div class="row">
       <div class="column">
-        <p>Simple input with input validation using promises</p>
-        <div id="renderSimplePromiseTagFilterHere"></div>
+            <div class="column">
+        <h1 class="ui dividing header">Using promises to validate input</h1>
+        <div class="ui pointing menu">
+          <a class="active item" data-tab="expl_2"> <i class="fa fa-play icon"></i> Live Example</a>
+          <a class="item" data-tab="cd_2"> <i class="fa fa-code icon"></i> Source</a>
+        </div>
+        <div class="ui active tab segment" data-tab="expl_2">
+          <div id="renderSimplePromiseTagFilterHere"></div>
+        </div>
+        <div class="ui tab segment" data-tab="cd_2">
+          <div>
+            <pre>
+              <code class="language-javascript">
+function promiseValidation(data) {
+  return new Promise(resolve => {
+    // do someting with the data, the resolved object will be inserted into the tags array
+    data.hello = 'world';
+    resolve(data);
+  });
+}
+
+React.render(React.createElement(
+  TagFilter, { tags: [], suggestions: [], onChange: onChangeFunction, onAdd: promiseValidation}),
+  document.getElementById('renderSimplePromiseTagFilterHere')
+);</code>
+            </pre>
+          </div>
+        </div>
       </div>
     </div>
 
   </div>
-</div>
 
   <script src="sample.js"></script>
   <script src="prism.js"></script>
@@ -164,6 +207,8 @@ React.render(React.createElement(ReactTagging, { onChange: onChangeFunction }), 
           npm.style.opacity = opacity + 0.2;
 
       };
+
+      $('.menu .item').tab();
 
     })();
 

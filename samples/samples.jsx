@@ -258,9 +258,6 @@ const sampleSuggestionsWithIds = [
   { id: 4, value: 'Volkswagen'},
 ];
 
-function onChangeFunction(newVal, oldVal) {
-  console.log('Changed from', oldVal, ' to ', newVal);
-}
 
 function ajaxRequestES6(text) {
   const requestPromise = new Promise(resolve => {
@@ -282,17 +279,32 @@ function ajaxRequestJQuery(text) {
   return requestPromise;
 }
 
+// Simple input without suggestions
+
+function onChangeFunction(newVal, oldVal) {
+  console.log('Changed from', oldVal, ' to ', newVal);
+}
+
+React.render(
+  React.createElement(
+    TagFilter, { tags: [], suggestions: [], onChange: onChangeFunction }),
+    document.getElementById('renderSimpleTagFilterHere')
+);
+
+// Using promises to validate input
+
 function promiseValidation(data) {
   return new Promise(resolve => {
-    // do someting with the data, the resolved data will be inserted into the tags array
+    // do someting with the data, the resolved object will be inserted into the tags array
     data.hello = 'world';
     resolve(data);
   });
 }
 
-React.render(React.createElement(TagFilter, { tags: [], suggestions: [], onChange: onChangeFunction }), document.getElementById('renderSimpleTagFilterHere'));
-
-React.render(React.createElement(TagFilter, { tags: [], suggestions: [], onChange: onChangeFunction, onAdd: promiseValidation}), document.getElementById('renderSimplePromiseTagFilterHere'));
+React.render(React.createElement(
+  TagFilter, { tags: [], suggestions: [], onChange: onChangeFunction, onAdd: promiseValidation}),
+  document.getElementById('renderSimplePromiseTagFilterHere')
+);
 
 // React.render(React.createElement(TagFilter, { tags: [{ id: undefined, value: 'Hungary'}], suggestions: sampleSuggestions, onChange: onChangeFunction}), document.getElementById('renderCountriesTagFilterHere'));
 
