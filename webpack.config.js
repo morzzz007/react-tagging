@@ -1,28 +1,29 @@
 path = require('path');
 
-var node_dir = __dirname +'/node_modules';
+var nodeDir = __dirname + '/node_modules';
 
 var config = {
   entry: {
-    reacttagging : './js/reacttagging.jsx'
+    reacttagging: './js/reacttagging.jsx',
   },
   externals: {
-    'react': 'react'
+    'react': 'react',
+    'react/addons': 'react/addons',
   },
   resolve: {
-    alias: {}
+    alias: {},
   },
   output: {
     libraryTarget: 'umd',
     path: process.env.NODE_ENV === 'production' ? './dist' : './build',
-    filename: '[name].js'
+    filename: '[name].js',
   },
   module: {
-  	noParse: [new RegExp(/\.min.js$/)],
+    noParse: [new RegExp(/\.min.js$/)],
     loaders: [
-      { test: /\.jsx$/, loader: 'babel-loader' }
-    ]
-  }
+      { test: /\.jsx$/, loader: 'babel-loader' },
+    ],
+  },
 };
 
 module.exports = config;
