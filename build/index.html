@@ -50,9 +50,9 @@
 <div class="ui large top fixed menu transition hidden">
   <div class="ui container">
     <a class="active item">Home</a>
-    <a class="item">Examples</a>
-    <a class="item">Api Docs</a>
-    <a class="item">Fork on GitHub</a>
+    <a class="item" href="#examples">Examples</a>
+    <a class="item" href="#apidocs">Api Docs</a>
+    <a class="item" href="https://github.com/morzzz007/react-tagging">Fork on GitHub</a>
   </div>
 </div>
 
@@ -66,10 +66,10 @@
           <i class="fa fa-bars"></i>
         </a>
         <a class="active item">Home</a>
-        <a class="item">Examples</a>
-        <a class="item">Api Docs</a>
+        <a class="item" href="#examples">Examples</a>
+        <a class="item" href="#apidocs">Api Docs</a>
         <div class="right item">
-          <a class="ui inverted button">Fork on GitHub</a>
+          <a class="ui inverted button" href="https://github.com/morzzz007/react-tagging">Fork on GitHub</a>
         </div>
       </div>
     </div>
@@ -118,7 +118,7 @@ React.render(React.createElement(ReactTagging, { onChange: onChangeFunction }), 
       </div>
     </div>
 
-  <div class="ui grid container">
+  <div class="ui grid container" name="examples">
     <div class="row">
       <div class="column">
         <h1 class="ui dividing header">Simple input without suggestions</h1>
@@ -127,7 +127,7 @@ React.render(React.createElement(ReactTagging, { onChange: onChangeFunction }), 
           <a class="item" data-tab="cd_1"> <i class="fa fa-code icon"></i> Source</a>
         </div>
         <div class="ui active tab segment" data-tab="expl_1">
-          <div id="renderSimpleTagFilterHere"></div>
+          <div id="renderSimpleReactTaggingHere"></div>
         </div>
         <div class="ui tab segment" data-tab="cd_1">
           <div>
@@ -139,8 +139,8 @@ function onChangeFunction(newVal, oldVal) {
 
 React.render(
   React.createElement(
-    TagFilter, { tags: [], suggestions: [], onChange: onChangeFunction }),
-    document.getElementById('renderSimpleTagFilterHere')
+    ReactTagging, { tags: [], suggestions: [], onChange: onChangeFunction }),
+    document.getElementById('renderSimpleReactTaggingHere')
 );</code>
             </pre>
           </div>
@@ -150,14 +150,13 @@ React.render(
 
     <div class="row">
       <div class="column">
-            <div class="column">
         <h1 class="ui dividing header">Using promises to validate input</h1>
         <div class="ui pointing menu">
           <a class="active item" data-tab="expl_2"> <i class="fa fa-play icon"></i> Live Example</a>
           <a class="item" data-tab="cd_2"> <i class="fa fa-code icon"></i> Source</a>
         </div>
         <div class="ui active tab segment" data-tab="expl_2">
-          <div id="renderSimplePromiseTagFilterHere"></div>
+          <div id="renderSimplePromiseReactTaggingHere"></div>
         </div>
         <div class="ui tab segment" data-tab="cd_2">
           <div>
@@ -172,8 +171,8 @@ function promiseValidation(data) {
 }
 
 React.render(React.createElement(
-  TagFilter, { tags: [], suggestions: [], onChange: onChangeFunction, onAdd: promiseValidation}),
-  document.getElementById('renderSimplePromiseTagFilterHere')
+  ReactTagging, { tags: [], suggestions: [], onChange: onChangeFunction, onAdd: promiseValidation}),
+  document.getElementById('renderSimplePromiseReactTaggingHere')
 );</code>
             </pre>
           </div>
@@ -181,6 +180,160 @@ React.render(React.createElement(
       </div>
     </div>
 
+    <div class="row">
+      <div class="column">
+        <h1 class="ui dividing header">Using predefined array of suggestions (countries)</h1>
+        <div class="ui pointing menu">
+          <a class="active item" data-tab="expl_3"> <i class="fa fa-play icon"></i> Live Example</a>
+          <a class="item" data-tab="cd_3"> <i class="fa fa-code icon"></i> Source</a>
+        </div>
+        <div class="ui active tab segment" data-tab="expl_3">
+          <div id="renderCountriesReactTaggingHere"></div>
+        </div>
+        <div class="ui tab segment" data-tab="cd_3">
+          <div>
+            <pre>
+              <code class="language-javascript">
+const sampleSuggestions = [
+  'Afghanistan',
+  'Albania',
+  'Algeria',
+  'American Samoa',
+  ...
+  'Zimbabwe'
+]
+
+React.render(React.createElement(
+  ReactTagging, { tags: [{ value: 'Hungary'}], suggestions: sampleSuggestions, onChange: onChangeFunction}), 
+  document.getElementById('renderCountriesReactTaggingHere')
+);</code>
+            </pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <h1 class="ui dividing header">AJAX suggestions using ES6 Promise, IE11+ (Fruits)</h1>
+        <div class="ui pointing menu">
+          <a class="active item" data-tab="expl_4"> <i class="fa fa-play icon"></i> Live Example</a>
+          <a class="item" data-tab="cd_4"> <i class="fa fa-code icon"></i> Source</a>
+        </div>
+        <div class="ui active tab segment" data-tab="expl_4">
+          <div id="renderMoviesReactTaggingHere"></div>
+        </div>
+        <div class="ui tab segment" data-tab="cd_4">
+          <div>
+            <pre>
+              <code class="language-javascript">
+function ajaxRequestES6(text) {
+  const requestPromise = new Promise(resolve => {
+    $.get( 'http://morz.hu/api/fruits.php', { q: text } ).done( data => {
+      resolve(data);
+    });
+  });
+
+  return requestPromise;
+}
+
+React.render(React.createElement(
+  ReactTagging, { suggestions: ajaxRequestES6, onChange: onChangeFunction}), 
+  document.getElementById('renderMoviesReactTaggingHere')
+);</code>
+            </pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <h1 class="ui dividing header">AJAX suggestions jQuery (Fruits)</h1>
+        <div class="ui pointing menu">
+          <a class="active item" data-tab="expl_5"> <i class="fa fa-play icon"></i> Live Example</a>
+          <a class="item" data-tab="cd_5"> <i class="fa fa-code icon"></i> Source</a>
+        </div>
+        <div class="ui active tab segment" data-tab="expl_5">
+          <div id="renderMoviesJqueryReactTaggingHere"></div>
+        </div>
+        <div class="ui tab segment" data-tab="cd_5">
+          <div>
+            <pre>
+              <code class="language-javascript">
+function ajaxRequestJQuery(text) {
+  const requestPromise = $.Deferred();
+
+  $.get( 'http://morz.hu/api/fruits.php', { q: text } ).done( data => {
+    requestPromise.resolve(data);
+  });
+
+  return requestPromise;
+}
+
+React.render(React.createElement(
+  ReactTagging, { suggestions: ajaxRequestJQuery, onChange: onChangeFunction}), 
+  document.getElementById('renderMoviesJqueryReactTaggingHere')
+);</code>
+            </pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ui middle aligned stackable grid container howto" name="apidocs">
+    <h1 class="ui dividing header u-margin-t25">Api Docs</h1>
+
+    <div class="row">
+      <table class="ui celled padded table">
+        <thead>
+          <tr>
+            <th class="single line">Name</th>
+            <th>Type</th>
+            <th>Info</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>onChange</td>
+            <td class="single line"><div class="ui teal horizontal label">function(newVal, oldVal)</div></td>
+            <td>The function to call when a new tag added or removed. <div class="ui blue horizontal label">newVal</div> contains the current value of the tags, <div class="ui blue horizontal label">oldVal</div> contains the previous value of the tags.</td>
+          </tr>
+          <tr>
+            <td>addKeys</td>
+            <td class="single line">Array</td>
+            <td>Array of keyCodes, defaults to <div class="ui blue horizontal label">Enter (13)</div></td>
+          </tr>
+          <tr>
+            <td>removeKeys</td>
+            <td class="single line">Array</td>
+            <td>Array of keyCodes, defaults to <div class="ui blue horizontal label">Backspace and Delete (46, 8)</div></td>
+          </tr>
+          <tr>
+            <td>upKey</td>
+            <td class="single line">Number</td>
+            <td>KeyCode that navigates up in the suggestions dropdown, defaults to <div class="ui blue horizontal label">Up arrow (38)</div></td>
+          </tr>
+          <tr>
+            <td>downKey</td>
+            <td class="single line">Number</td>
+            <td>KeyCode that navigates down in the suggestions dropdown, defaults to <div class="ui blue horizontal label">Down arrow (40)</div></td>
+          </tr>
+          <tr>
+            <td>suggestions</td>
+            <td class="single line">Array / <div class="ui teal horizontal label">function(searchString)</div></td>
+            <td>Suggestions to show in the dropdown menu. If it's a function it must return a promise with a <div class="ui blue horizontal label">then()</div> method. See the fruits example for sample implementation.</td>
+          </tr>
+          <tr>
+            <td>tags</td>
+            <td class="single line">Array</td>
+            <td>Pre-selected tags.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <script src="sample.js"></script>

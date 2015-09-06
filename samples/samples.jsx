@@ -1,5 +1,5 @@
 const React = require('react');
-const TagFilter = require('../js/reacttagging.jsx');
+const ReactTagging = require('../js/reacttagging.jsx');
 
 const sampleSuggestions = [
   'Afghanistan',
@@ -287,8 +287,8 @@ function onChangeFunction(newVal, oldVal) {
 
 React.render(
   React.createElement(
-    TagFilter, { tags: [], suggestions: [], onChange: onChangeFunction }),
-    document.getElementById('renderSimpleTagFilterHere')
+    ReactTagging, { tags: [], suggestions: [], onChange: onChangeFunction }),
+    document.getElementById('renderSimpleReactTaggingHere')
 );
 
 // Using promises to validate input
@@ -302,14 +302,51 @@ function promiseValidation(data) {
 }
 
 React.render(React.createElement(
-  TagFilter, { tags: [], suggestions: [], onChange: onChangeFunction, onAdd: promiseValidation}),
-  document.getElementById('renderSimplePromiseTagFilterHere')
+  ReactTagging, { tags: [], suggestions: [], onChange: onChangeFunction, onAdd: promiseValidation}),
+  document.getElementById('renderSimplePromiseReactTaggingHere')
 );
 
-// React.render(React.createElement(TagFilter, { tags: [{ id: undefined, value: 'Hungary'}], suggestions: sampleSuggestions, onChange: onChangeFunction}), document.getElementById('renderCountriesTagFilterHere'));
+// Using predefined suggestions array
 
-// React.render(React.createElement(TagFilter, { suggestions: sampleSuggestionsWithIds, onChange: onChangeFunction}), document.getElementById('renderCarsTagFilterHere'));
+React.render(React.createElement(
+  ReactTagging, { tags: [{ value: 'Hungary'}], suggestions: sampleSuggestions, onChange: onChangeFunction}), 
+  document.getElementById('renderCountriesReactTaggingHere')
+);
 
-// React.render(React.createElement(TagFilter, { suggestions: ajaxRequestES6, onChange: onChangeFunction}), document.getElementById('renderMoviesTagFilterHere'));
+// AJAX suggestions using ES6 Promise, IE11+
 
-// React.render(React.createElement(TagFilter, { suggestions: ajaxRequestJQuery, onChange: onChangeFunction}), document.getElementById('renderMoviesJqueryTagFilterHere'));
+function ajaxRequestES6(text) {
+  const requestPromise = new Promise(resolve => {
+    $.get( 'http://morz.hu/api/fruits.php', { q: text } ).done( data => {
+      resolve(data);
+    });
+  });
+
+  return requestPromise;
+}
+
+React.render(React.createElement(
+  ReactTagging, { suggestions: ajaxRequestES6, onChange: onChangeFunction}), 
+  document.getElementById('renderMoviesReactTaggingHere')
+);
+
+// AJAX suggestions using jQuery
+
+function ajaxRequestJQuery(text) {
+  const requestPromise = $.Deferred();
+
+  $.get( 'http://morz.hu/api/fruits.php', { q: text } ).done( data => {
+    requestPromise.resolve(data);
+  });
+
+  return requestPromise;
+}
+
+React.render(React.createElement(
+  ReactTagging, { suggestions: ajaxRequestJQuery, onChange: onChangeFunction}), 
+  document.getElementById('renderMoviesJqueryReactTaggingHere')
+);
+
+// React.render(React.createElement(ReactTagging, { suggestions: sampleSuggestionsWithIds, onChange: onChangeFunction}), document.getElementById('renderCarsReactTaggingHere'));
+
+
