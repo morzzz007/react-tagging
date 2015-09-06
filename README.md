@@ -1,4 +1,4 @@
 # react-tagging
 React tagging component with suggestions
 
-[Usage, Api docs and Demos](https://vast-lowlands-1586.herokuapp.com/)
+[Usage, Api docs and Demos](https://reacttagging.herokuapp.com/)
